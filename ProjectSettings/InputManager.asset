@@ -41,31 +41,159 @@ InputManager:
     m_Name: VerticalController1
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: down
-    positiveButton: up
-    altNegativeButton: s
-    altPositiveButton: w
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
     gravity: 3
-    dead: 0.001
-    sensitivity: 3
+    dead: 0.05
+    sensitivity: 0.5
+    snap: 1
+    invert: 0
+    type: 2
+    axis: 1
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: HorizontalController1
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 3
+    dead: 0.05
+    sensitivity: 0.5
     snap: 1
     invert: 0
     type: 2
     axis: 0
-    joyNum: 16
+    joyNum: 1
   - serializedVersion: 3
-    m_Name: VerticalKeyboard1
+    m_Name: StartController1
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: down
-    positiveButton: up
-    altNegativeButton: s
-    altPositiveButton: w
-    gravity: 3
+    negativeButton: 
+    positiveButton: joystick button 7
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.5
     dead: 0.001
-    sensitivity: 3
+    sensitivity: 0.5
     snap: 1
     invert: 0
     type: 0
-    axis: 0
-    joyNum: 0
+    axis: 6
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: SelectController1
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 6
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.5
+    dead: 0.001
+    sensitivity: 0.5
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 6
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: SelectController2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 6
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.5
+    dead: 0.001
+    sensitivity: 0.5
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 6
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: SelectController3
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 6
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.5
+    dead: 0.001
+    sensitivity: 0.5
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 6
+    joyNum: 3
+  - serializedVersion: 3
+    m_Name: SelectController4
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 6
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.5
+    dead: 0.001
+    sensitivity: 0.5
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 6
+    joyNum: 4
+  - serializedVersion: 3
+    m_Name: WeaponLeftController1
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 4
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.5
+    dead: 0.001
+    sensitivity: 0.5
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 6
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: WeaponRightController1
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 5
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.5
+    dead: 0.001
+    sensitivity: 0.5
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 6
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: WeaponShootController1
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 2
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.5
+    dead: 0.001
+    sensitivity: 0.5
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 6
+    joyNum: 1
