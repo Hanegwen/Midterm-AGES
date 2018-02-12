@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
+
+    [SerializeField]
+    Canvas startingScreen;
 
     [SerializeField]
     string[] playerNames;
     
     
-    public bool[] playerReady = new bool[4];
+    public bool[] playerReady = new bool[4]; //Max Player Count
+
+    [SerializeField]
+    Text[] joinScreens; //Same number as Max Player Count
 
     bool startGame = false;
 
@@ -18,7 +25,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-		
+        startingScreen.enabled = true;
 	}
 	
 	// Update is called once per frame
@@ -39,8 +46,9 @@ public class GameManager : MonoBehaviour {
         {
             if(Input.GetButtonDown("StartController" + i))
             {
+                int j = i - 1;
                 playerReady[i - 1] = true;
-                
+                joinScreens[i - 1].text = "Player " + i + " has joined the game";
             }
             i++;
         }
@@ -60,7 +68,7 @@ public class GameManager : MonoBehaviour {
                         //Start Game Here
                     }
 
-                    StartCoroutine(BeginGame());
+                    StartCoroutine(CountDown()); //Calls countdown to change countdown text
                 }
             }
             i++;
@@ -72,5 +80,10 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(gameLoadTime);
 
         startGame = true;
+    }
+
+    IEnumerator CountDown()
+    {
+        yield return null; //Calls BeginGame to Start The Game
     }
 }
