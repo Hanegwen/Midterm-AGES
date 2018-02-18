@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+#region Fields
     [SerializeField]
     GameObject bazookaBullet;
 
@@ -15,7 +17,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float playerSpeed;
 
+    [SerializeField]
+    float health;
+
+    float Health
+    {
+        get
+        {
+            return health;
+        }
+    }
+
+
     int playerNumber = 1; //With Muultiple Characters remove number
+
+    [SerializeField]
+    float chargeRate;
 
     [SerializeField]
     float minCharge;
@@ -30,11 +47,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Weapons ActiveWeapon;
 
-	// Use this for initialization
-	void Start ()
+    [SerializeField]
+    bool canShoot;
+
+    [SerializeField]
+    float shootSpeed;
+
+#endregion
+
+    // Use this for initialization
+    void Start ()
     {
         rigidbody = GetComponent<Rigidbody>();
         ActiveWeapon = Weapons.Bazooka;
+
+        canShoot = true;
 	}
 	
 	// Update is called once per frame
@@ -45,13 +72,24 @@ public class PlayerController : MonoBehaviour
         //MovementKeyboard();
 
         SwitchWeapon();
-        ShootWeapon();
+
+        if (canShoot)
+        {
+            ShootWeapon();
+        }
+
+        else
+        {
+            StartCoroutine(CanShoot());
+        }
 	}
 
     void RotatePlayerController()
     {
         gameObject.transform.eulerAngles = new Vector3(0, Mathf.Atan2(Input.GetAxis("HorizontalController" + playerNumber) , 
             Input.GetAxis("VerticalController" + playerNumber)) * 180  / Mathf.PI, 0);
+
+        
     }
 
     void MovementController()
@@ -59,7 +97,7 @@ public class PlayerController : MonoBehaviour
         float moveHortizontal = Input.GetAxis("HorizontalController" + playerNumber);
         float moveVertical = Input.GetAxis("VerticalController" + playerNumber);
 
-        Vector3 movement = new Vector3(moveHortizontal, 0.0f, moveVertical * -1);
+        Vector3 movement = new Vector3(moveHortizontal, 0.0f, moveVertical );
         rigidbody.velocity = movement * playerSpeed * Time.deltaTime;
     }
 
@@ -127,19 +165,32 @@ public class PlayerController : MonoBehaviour
 
     void ShootWeapon()
     {
-        if(currentCharge > maxCharge)
+        if(currentCharge > maxCharge * 1.2)
         {
             Explode();
         }
 
         if(Input.GetButtonDown("WeaponShootController" + playerNumber))
         {
+            currentCharge = 0;
+        }
+
+        if(Input.GetButton("WeaponShootController" + playerNumber))
+        {
+            currentCharge += chargeRate;
 
         }
 
         if(Input.GetButtonUp("WeaponShootController" + playerNumber))
         {
-
+            if(currentCharge < minCharge)
+            {
+                currentCharge = minCharge;
+            }
+            if(currentCharge > maxCharge)
+            {
+                currentCharge = maxCharge;
+            }
             Fire();
         }
     }
@@ -150,12 +201,33 @@ public class PlayerController : MonoBehaviour
 
         if(ActiveWeapon == Weapons.Bazooka)
         {
-            Instantiate(bazookaBullet, gunLocation, false);
+            GameObject bazookaAmmo = Instantiate(bazookaBullet, gunLocation, false);
+
+            bazookaAmmo.GetComponent<Rigidbody>().AddForce(transform.forward * currentCharge * Time.deltaTime);
+
         }
+
+        currentCharge = minCharge;
+        canShoot = false;
+
+        //StartCoroutine(CanShoot());
     }
 
     void Explode()
     {
+        canShoot = false;
+        //StartCoroutine(CanShoot());
         //Weapon Explodes and hurts player
+    }
+
+    IEnumerator CanShoot()
+    {
+        yield return new WaitForSeconds(shootSpeed);
+        canShoot = true;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
     }
 }

@@ -152,11 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fbaebc1798dcba45bf37ea46af7f020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bazookaBullet: {fileID: 1762044417594080, guid: 916cf0a5243bf3642b0671ce3655ff84,
+  bazookaBullet: {fileID: 1255543728893136, guid: 089565f3f05f5984fac3b3fed7b8b23a,
     type: 2}
   gunLocation: {fileID: 4991438299045974}
   playerSpeed: 200
-  minCharge: 0
-  maxCharge: 0
+  health: 100
+  minCharge: 100
+  maxCharge: 1000
   currentCharge: 0
   ActiveWeapon: 0
+  canShoot: 1
+  shootSpeed: 2
