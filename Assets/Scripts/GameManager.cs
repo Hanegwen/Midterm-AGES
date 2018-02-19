@@ -9,22 +9,39 @@ public class GameManager : MonoBehaviour {
     Canvas startingScreen;
 
     [SerializeField]
+    Text countdownText;
+
+    [SerializeField]
     string[] playerNames;
-    
+
+    [SerializeField]
+    List<GameObject> playerList;
     
     public bool[] playerReady = new bool[4]; //Max Player Count
 
     [SerializeField]
     Text[] joinScreens; //Same number as Max Player Count
 
+    [SerializeField]
+    Transform[] PlayerSpawnLocations; //Same number as Max Player Count
+
+    [SerializeField]
     bool startGame = false;
 
+    [SerializeField]
+    bool gameStarted = false;
+
     float gameLoadTime = 5;
+
+    [SerializeField]
+    GameObject playerPrefab;
 
 
 	// Use this for initialization
 	void Start ()
     {
+        playerList = new List<GameObject>();
+        countdownText.enabled = false;
         startingScreen.enabled = true;
 	}
 	
@@ -32,20 +49,26 @@ public class GameManager : MonoBehaviour {
 	void Update ()
     {
         playerNames = Input.GetJoystickNames();
-        
-        SetUpPlayers();
 
         StartGameCheck();
 
-	}
+        SetUpPlayers();
+
+        if (!gameStarted)
+        {
+            StartGame();
+        }
+    }
 
     void SetUpPlayers()
     {
+        countdownText.text = gameLoadTime + "...";
         int i = 1;
         foreach(string number in playerNames)
         {
             if(Input.GetButtonDown("StartController" + i))
             {
+                
                 int j = i - 1;
                 playerReady[i - 1] = true;
                 joinScreens[i - 1].text = "Player " + i + " has joined the game";
@@ -63,27 +86,49 @@ public class GameManager : MonoBehaviour {
             {
                 if(playerReady[i-1])
                 {
-                    if(startGame)
-                    {
-                        //Start Game Here
-                    }
-
-                    StartCoroutine(CountDown()); //Calls countdown to change countdown text
+                    StartCoroutine(CountDownAndBeginGame()); //Calls countdown to change countdown text
                 }
             }
             i++;
         }
     }
 
-    IEnumerator BeginGame()
+    void StartGame()
     {
-        yield return new WaitForSeconds(gameLoadTime);
+        if (startGame)
+        {
+            startingScreen.enabled = false;
+            gameStarted = true;
 
-        startGame = true;
+            int i = 0;
+            foreach(bool ready in playerReady)
+            {
+                if(playerReady[i])
+                {
+                    Instantiate(playerPrefab, PlayerSpawnLocations[i]);
+                    playerList.Add(playerPrefab);
+                    playerList[i].GetComponent<PlayerController>().PlayerNumber = i + 1;
+                    //Instantiate Players
+                }
+                i++;
+            }
+            //Start Game Here
+        }
+
     }
 
-    IEnumerator CountDown()
+
+    IEnumerator CountDownAndBeginGame()
     {
+        countdownText.enabled = true;
+
+        for(int i = 0; i < gameLoadTime; i+=0)
+        {
+            yield return new WaitForSeconds(1);
+            gameLoadTime--;
+        }
+
+        startGame = true;
         yield return null; //Calls BeginGame to Start The Game
     }
 }

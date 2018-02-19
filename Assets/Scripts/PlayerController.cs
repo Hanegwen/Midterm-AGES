@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     GameObject bazookaBullet;
 
     [SerializeField]
+    GameObject Launcher;
+
+    [SerializeField]
     Transform gunLocation;
 
     Rigidbody rigidbody;
@@ -29,7 +32,21 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    int playerNumber = 1; //With Muultiple Characters remove number
+    [SerializeField]
+    int playerNumber; //With Multiple Characters remove number
+
+    public int PlayerNumber
+    {
+        get
+        {
+            return playerNumber;
+        }
+
+        set
+        {
+            playerNumber = value;
+        }
+    }
 
     [SerializeField]
     float chargeRate;
@@ -62,6 +79,8 @@ public class PlayerController : MonoBehaviour
         ActiveWeapon = Weapons.Bazooka;
 
         canShoot = true;
+
+        transform.parent = null;
 	}
 	
 	// Update is called once per frame
@@ -129,6 +148,7 @@ public class PlayerController : MonoBehaviour
             else if (ActiveWeapon == Weapons.test1)
             {
                 ActiveWeapon = Weapons.Bazooka;
+                Instantiate(Launcher, gunLocation);
             }
 
             else if(ActiveWeapon == Weapons.test2)
@@ -157,6 +177,7 @@ public class PlayerController : MonoBehaviour
             else if (ActiveWeapon == Weapons.Grenade)
             {
                 ActiveWeapon = Weapons.Bazooka;
+                Instantiate(Launcher, gunLocation);
             }
   
         }

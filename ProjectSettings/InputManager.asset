@@ -198,7 +198,7 @@ InputManager:
     axis: 6
     joyNum: 1
   - serializedVersion: 3
-    m_Name: SubmitKeyboard
+    m_Name: SubmitKeyboard1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -214,11 +214,43 @@ InputManager:
     axis: 6
     joyNum: 1
   - serializedVersion: 3
-    m_Name: CancelKeyboard
+    m_Name: CancelKeyboard1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: escape
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.5
+    dead: 0.001
+    sensitivity: 0.5
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 6
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: SubmitController1
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 0
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.5
+    dead: 0.001
+    sensitivity: 0.5
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 6
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: CancelController1
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 1
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0.5

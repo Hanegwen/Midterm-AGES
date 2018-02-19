@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1942690562122800}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.36, y: 0.53, z: 6.67}
+  m_LocalPosition: {x: -10.667723, y: 0.00030518364, z: 3.6054382}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4991438299045974}
@@ -154,11 +154,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bazookaBullet: {fileID: 1255543728893136, guid: 089565f3f05f5984fac3b3fed7b8b23a,
     type: 2}
+  Launcher: {fileID: 1465395274254916, guid: 457be029d58ccef44ac33a90fc696a42, type: 2}
   gunLocation: {fileID: 4991438299045974}
   playerSpeed: 200
   health: 100
-  minCharge: 100
-  maxCharge: 1000
+  playerNumber: 1
+  chargeRate: 15
+  minCharge: 5000
+  maxCharge: 10000
   currentCharge: 0
   ActiveWeapon: 0
   canShoot: 1
