@@ -30,7 +30,7 @@ public class BazookaShell : MonoBehaviour {
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+            collision.gameObject.GetComponent<IDamagable>().TakeDamage(damage);
         }
         Destroy(this.gameObject);
     }

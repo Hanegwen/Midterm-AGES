@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamagable
 {
 
 #region Fields
@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     GameObject Launcher;
+
+    [SerializeField]
+    GameObject Grenade;
 
     [SerializeField]
     Transform gunLocation;
@@ -69,6 +72,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     float shootSpeed;
+
+    GameObject activeWeapon;
 
 #endregion
 
@@ -135,25 +140,32 @@ public class PlayerController : MonoBehaviour
         {
             if(ActiveWeapon == Weapons.Grenade)
             {
-                ActiveWeapon = Weapons.test2;
                 
+                ActiveWeapon = Weapons.test2;
+                Destroy(activeWeapon);
+
             }
 
             else if (ActiveWeapon == Weapons.Bazooka)
             {
-                ActiveWeapon = Weapons.Grenade;
                 
+                ActiveWeapon = Weapons.Grenade;
+                Destroy(activeWeapon);
+                activeWeapon = Instantiate(Grenade, gunLocation);
+
             }
 
             else if (ActiveWeapon == Weapons.test1)
             {
                 ActiveWeapon = Weapons.Bazooka;
-                Instantiate(Launcher, gunLocation);
+                Destroy(activeWeapon);
+                activeWeapon = Instantiate(Launcher, gunLocation);
             }
 
             else if(ActiveWeapon == Weapons.test2)
             {
                 ActiveWeapon = Weapons.test1;
+                Destroy(activeWeapon);
             }
         }
 
@@ -162,22 +174,27 @@ public class PlayerController : MonoBehaviour
             if (ActiveWeapon == Weapons.test2)
             {
                 ActiveWeapon = Weapons.Grenade;
+                activeWeapon = Instantiate(Grenade, gunLocation);
+                Destroy(activeWeapon);
             }
 
             else if (ActiveWeapon == Weapons.test1)
             {
                 ActiveWeapon = Weapons.test2;
+                Destroy(activeWeapon);
             }
 
             else if (ActiveWeapon == Weapons.Bazooka)
             {
                 ActiveWeapon = Weapons.test1;
+                Destroy(activeWeapon);
             }
 
             else if (ActiveWeapon == Weapons.Grenade)
             {
                 ActiveWeapon = Weapons.Bazooka;
-                Instantiate(Launcher, gunLocation);
+                Destroy(activeWeapon);
+                activeWeapon = Instantiate(Launcher, gunLocation);
             }
   
         }
