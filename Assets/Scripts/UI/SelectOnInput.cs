@@ -13,7 +13,7 @@ public class SelectOnInput : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        //A bug auto reloads game
     }
 
     // Update is called once per frame

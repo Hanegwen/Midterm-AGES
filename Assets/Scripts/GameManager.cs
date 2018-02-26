@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     [SerializeField]
+    Canvas uiCanvas;
+
+    [SerializeField]
     Canvas EndGameCanvas;
 
     [SerializeField]
@@ -47,6 +50,7 @@ public class GameManager : MonoBehaviour {
         playerList = new List<GameObject>();
         countdownText.enabled = false;
         startingScreen.enabled = true;
+        Time.timeScale = 1;
 	}
 	
 	// Update is called once per frame
@@ -62,8 +66,13 @@ public class GameManager : MonoBehaviour {
         {
             StartGame();
         }
-
+        UIUpdate();
         CheckDead();
+    }
+
+    void UIUpdate()
+    {
+
     }
 
     void SetUpPlayers()
@@ -119,6 +128,8 @@ public class GameManager : MonoBehaviour {
                 i++;
             }
             //Start Game Here
+            uiCanvas.enabled = true;
+
         }
 
     }
@@ -126,9 +137,9 @@ public class GameManager : MonoBehaviour {
     void CheckDead()
     {
         int i = 0;
-        foreach(float health in playerList)
+        foreach(GameObject player in playerList)
         {
-            if (health <= 0)
+            if (player.GetComponent<PlayerController>().Health <= 0)
             {
                 playerList.RemoveAt(i);
             }
@@ -136,13 +147,16 @@ public class GameManager : MonoBehaviour {
 
         if(playerList.Count == 1)
         {
-
+#if !UNITY_EDITOR
+            GameOver(); //Fix when ready to test
+#endif
         }
     }
 
     void GameOver()
     {
         EndGameCanvas.enabled = true;
+        Time.timeScale = 0;
     }
 
 

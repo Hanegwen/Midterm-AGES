@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 {
 
 #region Fields
+
     [SerializeField]
     GameObject bazookaBullet;
 
@@ -13,7 +14,10 @@ public class PlayerController : MonoBehaviour, IDamagable
     GameObject Launcher;
 
     [SerializeField]
-    GameObject Grenade;
+    GameObject heldGrenade;
+
+    [SerializeField]
+    GameObject shotGrenade;
 
     [SerializeField]
     Transform gunLocation;
@@ -26,7 +30,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     [SerializeField]
     float health;
 
-    float Health
+    public float Health
     {
         get
         {
@@ -63,7 +67,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     [SerializeField]
     float currentCharge;
 
-    enum Weapons {Grenade, Bazooka, test1, test2 };
+    enum Weapons {Grenade, Bazooka};
     [SerializeField]
     Weapons ActiveWeapon;
 
@@ -86,7 +90,9 @@ public class PlayerController : MonoBehaviour, IDamagable
         canShoot = true;
 
         transform.parent = null;
-	}
+
+        activeWeapon = Instantiate(Launcher, gunLocation);
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -140,9 +146,10 @@ public class PlayerController : MonoBehaviour, IDamagable
         {
             if(ActiveWeapon == Weapons.Grenade)
             {
-                
-                ActiveWeapon = Weapons.test2;
+
+                ActiveWeapon = Weapons.Bazooka;
                 Destroy(activeWeapon);
+                activeWeapon = Instantiate(Launcher, gunLocation);
 
             }
 
@@ -151,45 +158,23 @@ public class PlayerController : MonoBehaviour, IDamagable
                 
                 ActiveWeapon = Weapons.Grenade;
                 Destroy(activeWeapon);
-                activeWeapon = Instantiate(Grenade, gunLocation);
+                activeWeapon = Instantiate(heldGrenade, gunLocation);
 
             }
 
-            else if (ActiveWeapon == Weapons.test1)
-            {
-                ActiveWeapon = Weapons.Bazooka;
-                Destroy(activeWeapon);
-                activeWeapon = Instantiate(Launcher, gunLocation);
-            }
-
-            else if(ActiveWeapon == Weapons.test2)
-            {
-                ActiveWeapon = Weapons.test1;
-                Destroy(activeWeapon);
-            }
         }
 
         if(Input.GetButtonDown("WeaponRightController" + playerNumber))
         {
-            if (ActiveWeapon == Weapons.test2)
+            if (ActiveWeapon == Weapons.Bazooka)
             {
                 ActiveWeapon = Weapons.Grenade;
-                activeWeapon = Instantiate(Grenade, gunLocation);
+                
                 Destroy(activeWeapon);
+                activeWeapon = Instantiate(heldGrenade, gunLocation);
             }
 
-            else if (ActiveWeapon == Weapons.test1)
-            {
-                ActiveWeapon = Weapons.test2;
-                Destroy(activeWeapon);
-            }
-
-            else if (ActiveWeapon == Weapons.Bazooka)
-            {
-                ActiveWeapon = Weapons.test1;
-                Destroy(activeWeapon);
-            }
-
+ 
             else if (ActiveWeapon == Weapons.Grenade)
             {
                 ActiveWeapon = Weapons.Bazooka;
@@ -241,8 +226,14 @@ public class PlayerController : MonoBehaviour, IDamagable
         {
             GameObject bazookaAmmo = Instantiate(bazookaBullet, gunLocation, false);
 
-            bazookaAmmo.GetComponent<Rigidbody>().AddForce(transform.forward * currentCharge * Time.deltaTime);
+            bazookaAmmo.GetComponent<BazookaShell>().CurrentCharge = currentCharge;
 
+        }
+
+        if(ActiveWeapon == Weapons.Grenade)
+        {
+            GameObject grenades = Instantiate(shotGrenade, gunLocation, false);
+            grenades.GetComponent<Grenade>().CurrentCharge = currentCharge;
         }
 
         currentCharge = minCharge;
