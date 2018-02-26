@@ -11,4 +11,9 @@ public class MenuSystem : MonoBehaviour
         SceneManager.LoadScene("Level");
     }
 
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
 }

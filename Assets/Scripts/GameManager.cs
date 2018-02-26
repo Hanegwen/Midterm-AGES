@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     [SerializeField]
+    Canvas EndGameCanvas;
+
+    [SerializeField]
     Canvas startingScreen;
 
     [SerializeField]
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     GameObject playerPrefab;
 
+    bool endGame = false;
 
 	// Use this for initialization
 	void Start ()
@@ -58,6 +62,8 @@ public class GameManager : MonoBehaviour {
         {
             StartGame();
         }
+
+        CheckDead();
     }
 
     void SetUpPlayers()
@@ -115,6 +121,28 @@ public class GameManager : MonoBehaviour {
             //Start Game Here
         }
 
+    }
+
+    void CheckDead()
+    {
+        int i = 0;
+        foreach(float health in playerList)
+        {
+            if (health <= 0)
+            {
+                playerList.RemoveAt(i);
+            }
+        }
+
+        if(playerList.Count == 1)
+        {
+
+        }
+    }
+
+    void GameOver()
+    {
+        EndGameCanvas.enabled = true;
     }
 
 
