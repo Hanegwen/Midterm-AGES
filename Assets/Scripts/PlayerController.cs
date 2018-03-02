@@ -1,11 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IDamagable
 {
 
-#region Fields
+    #region Fields
+
+    [SerializeField]
+    Image fillImage;
+
+    [SerializeField]
+    Slider shootingArrow;
+
+    [SerializeField]
+    Slider healthSlider;
+
+    [SerializeField]
+    Color fullHealthColor = Color.green;
+
+    [SerializeField]
+    Color zeroHealthColor = Color.red;    
 
     [SerializeField]
     GameObject bazookaBullet;
@@ -29,6 +45,9 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     [SerializeField]
     float health;
+
+    [SerializeField]
+    float startingHealth;
 
     public float Health
     {
@@ -84,6 +103,10 @@ public class PlayerController : MonoBehaviour, IDamagable
     // Use this for initialization
     void Start ()
     {
+        shootingArrow.minValue = minCharge;
+        shootingArrow.maxValue = maxCharge;
+
+        startingHealth = health;
         rigidbody = GetComponent<Rigidbody>();
         ActiveWeapon = Weapons.Bazooka;
 
@@ -92,11 +115,17 @@ public class PlayerController : MonoBehaviour, IDamagable
         transform.parent = null;
 
         activeWeapon = Instantiate(Launcher, gunLocation);
+
+        shootingArrow.value = currentCharge;
+
+        
+        SetHealthUI();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        shootingArrow.value = currentCharge;
         RotatePlayerController();
         MovementController();
         //MovementKeyboard();
@@ -114,12 +143,17 @@ public class PlayerController : MonoBehaviour, IDamagable
         }
 	}
 
+    void SetHealthUI()
+    {
+        healthSlider.value = health;
+
+        fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, health / startingHealth);
+    }
+
     void RotatePlayerController()
     {
-        gameObject.transform.eulerAngles = new Vector3(0, Mathf.Atan2(Input.GetAxis("HorizontalController" + playerNumber) , 
-            Input.GetAxis("VerticalController" + playerNumber)) * 180  / Mathf.PI, 0);
-
-        
+        gameObject.transform.eulerAngles = new Vector3(0, Mathf.Atan2(Input.GetAxis("HorizontalControllerRight" + playerNumber) , 
+            Input.GetAxis("VerticalControllerRight" + playerNumber)) * 360  / Mathf.PI, 0);
     }
 
     void MovementController()
@@ -128,6 +162,10 @@ public class PlayerController : MonoBehaviour, IDamagable
         float moveVertical = Input.GetAxis("VerticalController" + playerNumber);
 
         Vector3 movement = new Vector3(moveHortizontal, 0.0f, moveVertical );
+        if(movement != new Vector3(0,0,0))
+        {
+            Debug.Log(Input.GetJoystickNames()[(playerNumber - 1)] + " is moved");
+        }
         rigidbody.velocity = movement * playerSpeed * Time.deltaTime;
     }
 
@@ -200,7 +238,11 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         if(Input.GetButton("WeaponShootController" + playerNumber))
         {
+            
+            
+            Debug.Log("Shooting" + playerNumber);
             currentCharge += chargeRate;
+            shootingArrow.value = currentCharge;
 
         }
 
@@ -236,7 +278,7 @@ public class PlayerController : MonoBehaviour, IDamagable
             grenades.GetComponent<Grenade>().CurrentCharge = currentCharge;
         }
 
-        currentCharge = minCharge;
+        currentCharge = 0;
         canShoot = false;
 
         //StartCoroutine(CanShoot());

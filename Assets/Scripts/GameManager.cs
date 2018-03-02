@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-    [SerializeField]
-    Canvas uiCanvas;
 
     [SerializeField]
     Canvas EndGameCanvas;
@@ -44,6 +42,8 @@ public class GameManager : MonoBehaviour {
 
     bool endGame = false;
 
+    public int numCheck;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -51,19 +51,18 @@ public class GameManager : MonoBehaviour {
         countdownText.enabled = false;
         startingScreen.enabled = true;
         Time.timeScale = 1;
-	}
+
+        playerNames = Input.GetJoystickNames();
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        playerNames = Input.GetJoystickNames();
 
         StartGameCheck();
-
-        SetUpPlayers();
-
         if (!gameStarted)
         {
+            SetUpPlayers();
             StartGame();
         }
         UIUpdate();
@@ -77,19 +76,27 @@ public class GameManager : MonoBehaviour {
 
     void SetUpPlayers()
     {
+        
         countdownText.text = gameLoadTime + "...";
-        int i = 1;
-        foreach(string number in playerNames)
+        numCheck = 0;
+        foreach (string number in playerNames)
         {
-            if(Input.GetButtonDown("StartController" + i))
+            if (playerReady[numCheck] == false)
             {
-                
-                int j = i - 1;
-                playerReady[i - 1] = true;
-                joinScreens[i - 1].text = "Player " + i + " has joined the game";
+                if (Input.GetButtonDown("StartController" + (numCheck + 1)))
+                {
+                    Debug.Log("Controller" + (numCheck + 1));
+                    playerReady[numCheck] = true;
+                    joinScreens[numCheck].text = "Player " + (numCheck + 1) + " has joined the game";
+                }
             }
-            i++;
+            else if(playerReady[numCheck] == true)
+            {
+                numCheck++;
+            }
         }
+            Debug.Log(numCheck);
+
     }
 
     void StartGameCheck()
@@ -128,7 +135,7 @@ public class GameManager : MonoBehaviour {
                 i++;
             }
             //Start Game Here
-            uiCanvas.enabled = true;
+            
 
         }
 

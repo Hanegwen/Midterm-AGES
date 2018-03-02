@@ -16,6 +16,8 @@ public class ShotWeapon : MonoBehaviour
 
     protected bool hitMax = false;
 
+    protected float wait = 0;
+
     public float CurrentCharge
     {
         set
@@ -25,6 +27,7 @@ public class ShotWeapon : MonoBehaviour
     }
     private void Update()
     {
+        wait++;
         if (transform.parent != null)
             transform.parent = null;
         MovementArch();
@@ -58,10 +61,18 @@ public class ShotWeapon : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Hit");
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             collision.gameObject.GetComponent<IDamagable>().TakeDamage(damage);
         }
         Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("trigger");
+        if(wait > 4)
+        transform.position = Vector3.Lerp(this.gameObject.transform.position, other.transform.position, 2);
     }
 }

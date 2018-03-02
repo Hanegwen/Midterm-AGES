@@ -19,17 +19,17 @@ public class TankHealth : MonoBehaviour
 
     private void Awake()
     {
-        m_ExplosionParticles = Instantiate(m_ExplosionPrefab).GetComponent<ParticleSystem>();
-        m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();
+        //m_ExplosionParticles = Instantiate(m_ExplosionPrefab).GetComponent<ParticleSystem>();
+        //m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();
 
-        m_ExplosionParticles.gameObject.SetActive(false);
+        //m_ExplosionParticles.gameObject.SetActive(false);
     }
 
 
     private void OnEnable()
     {
-        m_CurrentHealth = m_StartingHealth;
-        m_Dead = false;
+        //m_CurrentHealth = m_StartingHealth;
+        //m_Dead = false;
 
         SetHealthUI();
     }
