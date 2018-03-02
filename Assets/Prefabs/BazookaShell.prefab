@@ -303,7 +303,7 @@ MonoBehaviour:
   damage: 10
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!198 &198838286293506934
 ParticleSystem:
   m_ObjectHideFlags: 1

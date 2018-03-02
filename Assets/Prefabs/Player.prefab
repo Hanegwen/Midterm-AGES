@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224819014094985774}
   - component: {fileID: 222539900120517938}
   - component: {fileID: 114968830608629184}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 224497138613572654}
   - component: {fileID: 222181852534950556}
   - component: {fileID: 114876300471682596}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 224442218069891464}
   - component: {fileID: 222477800744487690}
   - component: {fileID: 114973099587193340}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 223710646726273464}
   - component: {fileID: 114182879500090242}
   - component: {fileID: 114328110227514244}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224064017671155176}
   - component: {fileID: 114986639712821596}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: AimSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224164452555997780}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,10 +122,13 @@ GameObject:
   - component: {fileID: 33070055516863952}
   - component: {fileID: 23153167512282642}
   - component: {fileID: 54315880861640106}
-  - component: {fileID: 114092463071471804}
   - component: {fileID: 65644377688665944}
   - component: {fileID: 65929147502321012}
-  m_Layer: 0
+  - component: {fileID: 114564436864956276}
+  - component: {fileID: 114616320089013494}
+  - component: {fileID: 114036005732542632}
+  - component: {fileID: 114116635528610528}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +143,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4991438299045974}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GunLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +160,7 @@ GameObject:
   - component: {fileID: 224505488315998578}
   - component: {fileID: 114081623442643196}
   - component: {fileID: 114703014752600538}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: HealthSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +175,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224802077670383462}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,6 +290,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.56, y: 4.42, z: 4.58}
   m_Center: {x: 0.21964908, y: 1.561903, z: -0.17298424}
+--- !u!114 &114036005732542632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942690562122800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77e244cc99214924eb566e759667b156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNumber: 0
+  shootingArrow: {fileID: 114986639712821596}
+  chargeRate: 17
+  minCharge: 3000
+  maxCharge: 10000
+  currentCharge: 0
+  ActiveWeapon: 0
+  canShoot: 0
+  shootSpeed: 0
+  bazookaBullet: {fileID: 1255543728893136, guid: 089565f3f05f5984fac3b3fed7b8b23a,
+    type: 2}
+  Launcher: {fileID: 1465395274254916, guid: 457be029d58ccef44ac33a90fc696a42, type: 2}
+  heldGrenade: {fileID: 1538022005002518, guid: 8588a04b5dd46084ca7a381ff69461ec,
+    type: 2}
+  shotGrenade: {fileID: 1209221725682450, guid: fe5bb511e133e0d44bc311dc90343384,
+    type: 2}
+  gunLocation: {fileID: 4991438299045974}
 --- !u!114 &114081623442643196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -335,7 +366,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114092463071471804
+--- !u!114 &114116635528610528
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -343,33 +374,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1942690562122800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fbaebc1798dcba45bf37ea46af7f020, type: 3}
+  m_Script: {fileID: 11500000, guid: d3aaf93688c432c4dae344d394f3df3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillImage: {fileID: 114973099587193340}
-  shootingArrow: {fileID: 114986639712821596}
-  healthSlider: {fileID: 114081623442643196}
-  fullHealthColor: {r: 0, g: 1, b: 0, a: 1}
-  zeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
-  bazookaBullet: {fileID: 1255543728893136, guid: 089565f3f05f5984fac3b3fed7b8b23a,
-    type: 2}
-  Launcher: {fileID: 1465395274254916, guid: 457be029d58ccef44ac33a90fc696a42, type: 2}
-  heldGrenade: {fileID: 1538022005002518, guid: 8588a04b5dd46084ca7a381ff69461ec,
-    type: 2}
-  shotGrenade: {fileID: 1209221725682450, guid: fe5bb511e133e0d44bc311dc90343384,
-    type: 2}
-  gunLocation: {fileID: 4991438299045974}
-  playerSpeed: 200
-  health: 100
-  startingHealth: 0
   playerNumber: 2
-  chargeRate: 7
-  minCharge: 500
-  maxCharge: 3000
-  currentCharge: 0
-  ActiveWeapon: 0
-  canShoot: 1
-  shootSpeed: 2
 --- !u!114 &114182879500090242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -407,6 +415,39 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114564436864956276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942690562122800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e168f2c3975f1a47bc04fe0aa743f1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNumber: 2
+  fillImage: {fileID: 114973099587193340}
+  health: 100
+  startingHealth: 100
+  healthSlider: {fileID: 114081623442643196}
+  fullHealthColor: {r: 0, g: 1, b: 0, a: 1}
+  zeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  hitExplosion: {fileID: 198435780952609500, guid: c44800291b36184468fb21cde1cb9b61,
+    type: 2}
+--- !u!114 &114616320089013494
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942690562122800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d4e2e4062363e47b643387b0d7b0f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNumber: 0
+  playerSpeed: 250
 --- !u!114 &114703014752600538
 MonoBehaviour:
   m_ObjectHideFlags: 1

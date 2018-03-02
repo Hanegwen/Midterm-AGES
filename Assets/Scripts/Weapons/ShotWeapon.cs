@@ -11,7 +11,7 @@ public class ShotWeapon : MonoBehaviour
     LayerMask playerLayer;
 
     protected float currentCharge;
-    protected float maxY = 3;
+    protected float maxY = 1.5f;
     protected float minY = 1;
 
     protected bool hitMax = false;
@@ -65,6 +65,7 @@ public class ShotWeapon : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             collision.gameObject.GetComponent<IDamagable>().TakeDamage(damage);
+            Debug.Log("Damage: " + damage);
         }
         Destroy(this.gameObject);
     }
@@ -72,7 +73,12 @@ public class ShotWeapon : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("trigger");
-        if(wait > 4)
-        transform.position = Vector3.Lerp(this.gameObject.transform.position, other.transform.position, 2);
+        if (wait > 1)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                transform.position = Vector3.Lerp(this.gameObject.transform.position, other.transform.position, 10);
+            }
+        }
     }
 }

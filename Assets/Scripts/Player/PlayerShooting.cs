@@ -3,25 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour, IDamagable
+public class PlayerShooting : MonoBehaviour
 {
-
-    #region Fields
-
     [SerializeField]
-    Image fillImage;
-
+    int playerNumber = 1;
+    public int PlayerNumber
+    {
+        get
+        {
+            return playerNumber;
+        }
+        set
+        {
+            playerNumber = value;
+        }
+    }
     [SerializeField]
     Slider shootingArrow;
 
     [SerializeField]
-    Slider healthSlider;
+    float chargeRate;
 
     [SerializeField]
-    Color fullHealthColor = Color.green;
+    float minCharge;
 
     [SerializeField]
-    Color zeroHealthColor = Color.red;    
+    float maxCharge;
+
+    [SerializeField]
+    float currentCharge;
+
+    enum Weapons { Grenade, Bazooka };
+    [SerializeField]
+    Weapons ActiveWeapon;
+
+    [SerializeField]
+    bool canShoot;
+
+    [SerializeField]
+    float shootSpeed;
+
+    GameObject activeWeapon;
 
     [SerializeField]
     GameObject bazookaBullet;
@@ -38,97 +60,23 @@ public class PlayerController : MonoBehaviour, IDamagable
     [SerializeField]
     Transform gunLocation;
 
-    Rigidbody rigidbody;
-
-    [SerializeField]
-    float playerSpeed;
-
-    [SerializeField]
-    float health;
-
-    [SerializeField]
-    float startingHealth;
-
-    public float Health
-    {
-        get
-        {
-            return health;
-        }
-    }
-
-
-    [SerializeField]
-    int playerNumber; //With Multiple Characters remove number
-
-    public int PlayerNumber
-    {
-        get
-        {
-            return playerNumber;
-        }
-
-        set
-        {
-            playerNumber = value;
-        }
-    }
-
-    [SerializeField]
-    float chargeRate;
-
-    [SerializeField]
-    float minCharge;
-
-    [SerializeField]
-    float maxCharge;
-
-    [SerializeField]
-    float currentCharge;
-
-    enum Weapons {Grenade, Bazooka};
-    [SerializeField]
-    Weapons ActiveWeapon;
-
-    [SerializeField]
-    bool canShoot;
-
-    [SerializeField]
-    float shootSpeed;
-
-    GameObject activeWeapon;
-
-#endregion
 
     // Use this for initialization
     void Start ()
     {
         shootingArrow.minValue = minCharge;
         shootingArrow.maxValue = maxCharge;
-
-        startingHealth = health;
-        rigidbody = GetComponent<Rigidbody>();
-        ActiveWeapon = Weapons.Bazooka;
-
         canShoot = true;
-
-        transform.parent = null;
-
+        ActiveWeapon = Weapons.Bazooka;
         activeWeapon = Instantiate(Launcher, gunLocation);
 
         shootingArrow.value = currentCharge;
-
-        
-        SetHealthUI();
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         shootingArrow.value = currentCharge;
-        RotatePlayerController();
-        MovementController();
-        //MovementKeyboard();
 
         SwitchWeapon();
 
@@ -141,48 +89,13 @@ public class PlayerController : MonoBehaviour, IDamagable
         {
             StartCoroutine(CanShoot());
         }
-	}
-
-    void SetHealthUI()
-    {
-        healthSlider.value = health;
-
-        fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, health / startingHealth);
-    }
-
-    void RotatePlayerController()
-    {
-        gameObject.transform.eulerAngles = new Vector3(0, Mathf.Atan2(Input.GetAxis("HorizontalControllerRight" + playerNumber) , 
-            Input.GetAxis("VerticalControllerRight" + playerNumber)) * 360  / Mathf.PI, 0);
-    }
-
-    void MovementController()
-    {
-        float moveHortizontal = Input.GetAxis("HorizontalController" + playerNumber);
-        float moveVertical = Input.GetAxis("VerticalController" + playerNumber);
-
-        Vector3 movement = new Vector3(moveHortizontal, 0.0f, moveVertical );
-        if(movement != new Vector3(0,0,0))
-        {
-            Debug.Log(Input.GetJoystickNames()[(playerNumber - 1)] + " is moved");
-        }
-        rigidbody.velocity = movement * playerSpeed * Time.deltaTime;
-    }
-
-    void MovementKeyboard()
-    {
-        float moveHorizontal = Input.GetAxis("HorizontalKeyboard" + playerNumber);
-        float moveVertical = Input.GetAxis("VerticalKeyboard" + playerNumber);
-
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        rigidbody.velocity = movement * playerSpeed * Time.deltaTime;
     }
 
     void SwitchWeapon()
     {
-        if(Input.GetButtonDown("WeaponLeftController" + playerNumber))
+        if (Input.GetButtonDown("WeaponLeftController" + playerNumber))
         {
-            if(ActiveWeapon == Weapons.Grenade)
+            if (ActiveWeapon == Weapons.Grenade)
             {
 
                 ActiveWeapon = Weapons.Bazooka;
@@ -193,7 +106,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
             else if (ActiveWeapon == Weapons.Bazooka)
             {
-                
+
                 ActiveWeapon = Weapons.Grenade;
                 Destroy(activeWeapon);
                 activeWeapon = Instantiate(heldGrenade, gunLocation);
@@ -202,57 +115,57 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         }
 
-        if(Input.GetButtonDown("WeaponRightController" + playerNumber))
+        if (Input.GetButtonDown("WeaponRightController" + playerNumber))
         {
             if (ActiveWeapon == Weapons.Bazooka)
             {
                 ActiveWeapon = Weapons.Grenade;
-                
+
                 Destroy(activeWeapon);
                 activeWeapon = Instantiate(heldGrenade, gunLocation);
             }
 
- 
+
             else if (ActiveWeapon == Weapons.Grenade)
             {
                 ActiveWeapon = Weapons.Bazooka;
                 Destroy(activeWeapon);
                 activeWeapon = Instantiate(Launcher, gunLocation);
             }
-  
+
         }
 
     }
 
     void ShootWeapon()
     {
-        if(currentCharge > maxCharge * 1.2)
+        if (currentCharge > maxCharge * 1.2)
         {
             Explode();
         }
 
-        if(Input.GetButtonDown("WeaponShootController" + playerNumber))
+        if (Input.GetButtonDown("WeaponShootController" + playerNumber))
         {
             currentCharge = 0;
         }
 
-        if(Input.GetButton("WeaponShootController" + playerNumber))
+        if (Input.GetButton("WeaponShootController" + playerNumber))
         {
-            
-            
+
+
             Debug.Log("Shooting" + playerNumber);
             currentCharge += chargeRate;
             shootingArrow.value = currentCharge;
 
         }
 
-        if(Input.GetButtonUp("WeaponShootController" + playerNumber))
+        if (Input.GetButtonUp("WeaponShootController" + playerNumber))
         {
-            if(currentCharge < minCharge)
+            if (currentCharge < minCharge)
             {
                 currentCharge = minCharge;
             }
-            if(currentCharge > maxCharge)
+            if (currentCharge > maxCharge)
             {
                 currentCharge = maxCharge;
             }
@@ -264,7 +177,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     {
         //Fire weapon based on charge
 
-        if(ActiveWeapon == Weapons.Bazooka)
+        if (ActiveWeapon == Weapons.Bazooka)
         {
             GameObject bazookaAmmo = Instantiate(bazookaBullet, gunLocation, false);
 
@@ -272,7 +185,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         }
 
-        if(ActiveWeapon == Weapons.Grenade)
+        if (ActiveWeapon == Weapons.Grenade)
         {
             GameObject grenades = Instantiate(shotGrenade, gunLocation, false);
             grenades.GetComponent<Grenade>().CurrentCharge = currentCharge;
@@ -297,8 +210,4 @@ public class PlayerController : MonoBehaviour, IDamagable
         canShoot = true;
     }
 
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-    }
 }

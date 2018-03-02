@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour {
                 {
                     Instantiate(playerPrefab, PlayerSpawnLocations[i]);
                     playerList.Add(playerPrefab);
-                    playerList[i].GetComponent<PlayerController>().PlayerNumber = i + 1;
+                    playerList[i].GetComponent<IPlayerNumber>().PlayerNumberSet = i + 1;
                     //Instantiate Players
                 }
                 i++;
@@ -146,17 +146,18 @@ public class GameManager : MonoBehaviour {
         int i = 0;
         foreach(GameObject player in playerList)
         {
-            if (player.GetComponent<PlayerController>().Health <= 0)
+            if (player.GetComponent<PlayerHealth>().Health <= 0)
             {
-                playerList.RemoveAt(i);
+                if (player.GetComponent<IPlayerNumber>().PlayerNumberSet <= 0)
+                {
+                    playerList.RemoveAt(i);
+                }
             }
         }
 
         if(playerList.Count == 1)
         {
-#if !UNITY_EDITOR
             GameOver(); //Fix when ready to test
-#endif
         }
     }
 
