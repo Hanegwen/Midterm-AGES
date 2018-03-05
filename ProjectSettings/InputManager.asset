@@ -195,7 +195,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 9
+    axis: 2
     joyNum: 1
   - serializedVersion: 3
     m_Name: SubmitKeyboard1
@@ -510,12 +510,12 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
-    dead: 0.05
+    dead: 0.5
     sensitivity: 0.9
     snap: 1
     invert: 0
     type: 2
-    axis: 9
+    axis: 2
     joyNum: 2
   - serializedVersion: 3
     m_Name: WeaponShootController3
@@ -526,12 +526,12 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
-    dead: 0.05
+    dead: 0.5
     sensitivity: 0.9
     snap: 1
     invert: 0
     type: 2
-    axis: 9
+    axis: 2
     joyNum: 3
   - serializedVersion: 3
     m_Name: WeaponShootController4
@@ -542,12 +542,12 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
-    dead: 0.05
+    dead: 0.5
     sensitivity: 0.9
     snap: 1
     invert: 0
     type: 2
-    axis: 9
+    axis: 2
     joyNum: 4
   - serializedVersion: 3
     m_Name: VerticalController
@@ -622,8 +622,8 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
-    dead: 0.05
-    sensitivity: 0.5
+    dead: 0.8
+    sensitivity: 0.1
     snap: 1
     invert: 0
     type: 2
@@ -638,8 +638,8 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
-    dead: 0.05
-    sensitivity: 0.5
+    dead: 0.8
+    sensitivity: 0.3
     snap: 1
     invert: 0
     type: 2
@@ -654,8 +654,8 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
-    dead: 0.05
-    sensitivity: 0.5
+    dead: 0.8
+    sensitivity: 0.3
     snap: 1
     invert: 0
     type: 2
@@ -670,8 +670,8 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
-    dead: 0.05
-    sensitivity: 0.5
+    dead: 0.8
+    sensitivity: 0.3
     snap: 1
     invert: 0
     type: 2
@@ -739,5 +739,21 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
+    axis: 4
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: CancelController
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 1
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 3
+    dead: 0.05
+    sensitivity: 0.5
+    snap: 1
+    invert: 0
+    type: 0
     axis: 4
     joyNum: 1

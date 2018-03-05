@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField]
-    int playerNumber = 1;
+    int playerNumber;
     public int PlayerNumber
     {
         get
@@ -79,6 +79,7 @@ public class PlayerShooting : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        Debug.Log("ShootingINUPDATE: " + (Input.GetAxis("WeaponShootController" + playerNumber)));
         shootingArrow.value = currentCharge;
 
         SwitchWeapon();
@@ -142,28 +143,25 @@ public class PlayerShooting : MonoBehaviour
 
     void ShootWeapon()
     {
-        Debug.Log(Input.GetAxis("WeaponShootController" + playerNumber));
-        if (currentCharge > maxCharge * 1.2)
-        {
-            Explode();
-        }
-        if (Input.GetAxis("WeaponShootController" + playerNumber) > .7 && !holdShoot)
+        Debug.Log("Shooting" + (Input.GetAxis("WeaponShootController" + playerNumber)));
+        //if (currentCharge > maxCharge * 1.2)
+        //{
+        //    Explode();
+        //}
+        if (Input.GetAxis("WeaponShootController" + playerNumber) < -.7 && !holdShoot)
         {
             currentCharge = 0;
             holdShoot = true;
         }
 
-        if (Input.GetAxis("WeaponShootController" + playerNumber) > .7 && holdShoot)
+        if (Input.GetAxis("WeaponShootController" + playerNumber) < -.7 && holdShoot)
         {
-
-
-            Debug.Log("Shooting" + playerNumber);
+            Debug.Log(("Shooting" + playerNumber));
             currentCharge += chargeRate;
             shootingArrow.value = currentCharge;
-
         }
 
-        if (Input.GetAxis("WeaponShootController" + playerNumber) < .1 && holdShoot)
+        if (Input.GetAxis("WeaponShootController" + playerNumber) > -.2 && holdShoot)
         {
             if (currentCharge < minCharge)
             {

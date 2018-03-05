@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour, IDamagable
 {
     [SerializeField]
-    int playerNumber = 1;
+    int playerNumber;
     public int PlayerNumber
     {
         get
@@ -51,9 +51,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     // Use this for initialization
     void Start ()
     {
-        
         startingHealth = health;
-
     }
 
     // Update is called once per frame

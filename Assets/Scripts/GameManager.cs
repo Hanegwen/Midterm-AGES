@@ -125,10 +125,11 @@ public class GameManager : MonoBehaviour {
             int i = 0;
             foreach(bool ready in playerReady)
             {
+                
                 if(playerReady[i])
                 {
-                    Instantiate(playerPrefab, PlayerSpawnLocations[i]);
-                    playerList.Add(playerPrefab);
+                    GameObject player = Instantiate(playerPrefab, PlayerSpawnLocations[i]);
+                    playerList.Add(player);
                     playerList[i].GetComponent<IPlayerNumber>().PlayerNumberSet = i + 1;
                     //Instantiate Players
                 }
@@ -143,12 +144,16 @@ public class GameManager : MonoBehaviour {
 
     void CheckDead()
     {
+        Debug.Log("Player Alive: " + playerList.Count);
         int i = 0;
         foreach(GameObject player in playerList)
         {
+            Debug.Log("For Each Loop Called");
+            Debug.Log(player.GetComponent<PlayerHealth>().Health);
             if (player.GetComponent<PlayerHealth>().Health <= 0)
             {
-                if (player.GetComponent<IPlayerNumber>().PlayerNumberSet <= 0)
+                Debug.Log("Player DEAD");
+                if (player.GetComponent<IPlayerNumber>().PlayerNumberSet >= 0)
                 {
                     playerList.RemoveAt(i);
                 }
@@ -170,15 +175,36 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator CountDownAndBeginGame()
     {
+        bool cancel = false;
         countdownText.enabled = true;
 
         for(int i = 0; i < gameLoadTime; i+=0)
         {
             yield return new WaitForSeconds(1);
             gameLoadTime--;
-        }
+            if (Input.GetButton("CancelController"))
+            {
+                cancel = true;
+                
+            }
 
-        startGame = true;
+
+        }
+        if (cancel)
+        {
+            countdownText.enabled = false;
+            gameLoadTime = 5;
+            foreach (string number in playerNames)
+            {
+                playerReady[numCheck] = false;
+                numCheck++;
+            }
+            cancel = false;
+        }
+        else
+        {
+            startGame = true;
+        }
         yield return null; //Calls BeginGame to Start The Game
     }
 }

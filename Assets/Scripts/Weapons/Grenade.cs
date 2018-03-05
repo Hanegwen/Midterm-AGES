@@ -19,7 +19,7 @@ public class Grenade : ShotWeapon
     protected override void IUpdate()
     {
         wait += Time.deltaTime;
-        if(wait > 1)
+        if(wait * Time.deltaTime > .8f)
         {
             capsuleCollider.enabled = true;
         }

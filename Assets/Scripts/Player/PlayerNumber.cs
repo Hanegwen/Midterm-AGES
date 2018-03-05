@@ -8,7 +8,7 @@ public class PlayerNumber : MonoBehaviour, IPlayerNumber
     PlayerHealth ph;
     PlayerShooting ps;
     [SerializeField]
-    int playerNumber = 1;
+    int playerNumber;
     public int PlayerNumberSet
     {
         get

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    int playerNumber = 1;
+    int playerNumber;
     public int PlayerNumber
     {
         get
@@ -32,18 +32,22 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        RotatePlayerController();
-        MovementController();
-        //MovementKeyboard();
-        
+        if (playerNumber != 0)
+        {
+            RotatePlayerController();
+            MovementController();
+            //MovementKeyboard();
 
 
+        }
     }
 
     void RotatePlayerController()
     {
-        gameObject.transform.eulerAngles += new Vector3(0, Mathf.Atan2(Input.GetAxis("HorizontalControllerRight" + playerNumber),
-            Input.GetAxis("VerticalControllerRight" + playerNumber)) * 15 / Mathf.PI, 0);
+        float rotation = Mathf.Atan2(Input.GetAxis("HorizontalControllerRight" + playerNumber),
+            Input.GetAxis("VerticalControllerRight" + playerNumber)) * 15 / Mathf.PI;
+        Debug.Log(rotation);
+        gameObject.transform.eulerAngles += new Vector3(0, rotation, 0);
     }
 
     void MovementController()
