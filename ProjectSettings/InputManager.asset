@@ -186,16 +186,16 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 1 button 2
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0.5
     dead: 0.04
-    sensitivity: 0.5
+    sensitivity: 0.9
     snap: 1
     invert: 0
-    type: 0
-    axis: 2
+    type: 2
+    axis: 9
     joyNum: 1
   - serializedVersion: 3
     m_Name: SubmitKeyboard1
@@ -506,48 +506,48 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 2 button 2
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
     dead: 0.05
-    sensitivity: 0.5
+    sensitivity: 0.9
     snap: 1
     invert: 0
-    type: 0
-    axis: 6
+    type: 2
+    axis: 9
     joyNum: 2
   - serializedVersion: 3
     m_Name: WeaponShootController3
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 3 button 2
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
     dead: 0.05
-    sensitivity: 0.5
+    sensitivity: 0.9
     snap: 1
     invert: 0
-    type: 0
-    axis: 6
+    type: 2
+    axis: 9
     joyNum: 3
   - serializedVersion: 3
     m_Name: WeaponShootController4
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 4 button 2
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
     dead: 0.05
-    sensitivity: 0.5
+    sensitivity: 0.9
     snap: 1
     invert: 0
-    type: 0
-    axis: 6
+    type: 2
+    axis: 9
     joyNum: 4
   - serializedVersion: 3
     m_Name: VerticalController

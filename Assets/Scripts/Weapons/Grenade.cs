@@ -8,7 +8,6 @@ public class Grenade : ShotWeapon
 
     CapsuleCollider capsuleCollider;
 
-    float wait = 0;
 
     // Use this for initialization
     void Start()

@@ -42,8 +42,8 @@ public class PlayerMovement : MonoBehaviour
 
     void RotatePlayerController()
     {
-        gameObject.transform.eulerAngles = new Vector3(0, Mathf.Atan2(Input.GetAxis("HorizontalControllerRight" + playerNumber),
-            Input.GetAxis("VerticalControllerRight" + playerNumber)) * 360 / Mathf.PI, 0);
+        gameObject.transform.eulerAngles += new Vector3(0, Mathf.Atan2(Input.GetAxis("HorizontalControllerRight" + playerNumber),
+            Input.GetAxis("VerticalControllerRight" + playerNumber)) * 15 / Mathf.PI, 0);
     }
 
     void MovementController()

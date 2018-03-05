@@ -60,6 +60,9 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField]
     Transform gunLocation;
 
+    bool holdShoot = false;
+
+
 
     // Use this for initialization
     void Start ()
@@ -139,17 +142,18 @@ public class PlayerShooting : MonoBehaviour
 
     void ShootWeapon()
     {
+        Debug.Log(Input.GetAxis("WeaponShootController" + playerNumber));
         if (currentCharge > maxCharge * 1.2)
         {
             Explode();
         }
-
-        if (Input.GetButtonDown("WeaponShootController" + playerNumber))
+        if (Input.GetAxis("WeaponShootController" + playerNumber) > .7 && !holdShoot)
         {
             currentCharge = 0;
+            holdShoot = true;
         }
 
-        if (Input.GetButton("WeaponShootController" + playerNumber))
+        if (Input.GetAxis("WeaponShootController" + playerNumber) > .7 && holdShoot)
         {
 
 
@@ -159,7 +163,7 @@ public class PlayerShooting : MonoBehaviour
 
         }
 
-        if (Input.GetButtonUp("WeaponShootController" + playerNumber))
+        if (Input.GetAxis("WeaponShootController" + playerNumber) < .1 && holdShoot)
         {
             if (currentCharge < minCharge)
             {
@@ -170,6 +174,7 @@ public class PlayerShooting : MonoBehaviour
                 currentCharge = maxCharge;
             }
             Fire();
+            holdShoot = false;
         }
     }
 

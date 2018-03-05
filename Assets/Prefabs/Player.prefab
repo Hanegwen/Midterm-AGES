@@ -304,7 +304,7 @@ MonoBehaviour:
   playerNumber: 0
   shootingArrow: {fileID: 114986639712821596}
   chargeRate: 17
-  minCharge: 3000
+  minCharge: 1000
   maxCharge: 10000
   currentCharge: 0
   ActiveWeapon: 0
@@ -580,10 +580,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 224497138613572654}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
-  m_MinValue: 15
+  m_MinValue: 10
   m_MaxValue: 30
   m_WholeNumbers: 0
-  m_Value: 15
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
