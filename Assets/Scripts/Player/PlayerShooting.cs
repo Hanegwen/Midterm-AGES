@@ -6,6 +6,12 @@ using UnityEngine.UI;
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField]
+    AudioClip shootingClip;
+
+    [SerializeField]
+    AudioSource shootingSource;
+
+    [SerializeField]
     int playerNumber;
     public int PlayerNumber
     {
@@ -74,6 +80,8 @@ public class PlayerShooting : MonoBehaviour
         activeWeapon = Instantiate(Launcher, gunLocation);
 
         shootingArrow.value = currentCharge;
+
+        shootingSource.clip = shootingClip;
     }
 
     // Update is called once per frame
@@ -159,6 +167,7 @@ public class PlayerShooting : MonoBehaviour
             Debug.Log(("Shooting" + playerNumber));
             currentCharge += chargeRate;
             shootingArrow.value = currentCharge;
+            
         }
 
         if (Input.GetAxis("WeaponShootController" + playerNumber) > -.2 && holdShoot)
@@ -179,7 +188,7 @@ public class PlayerShooting : MonoBehaviour
     void Fire()
     {
         //Fire weapon based on charge
-
+        shootingSource.Play();
         if (ActiveWeapon == Weapons.Bazooka)
         {
             GameObject bazookaAmmo = Instantiate(bazookaBullet, gunLocation, false);

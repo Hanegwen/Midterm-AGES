@@ -6,6 +6,12 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour, IDamagable
 {
     [SerializeField]
+    AudioClip hitClip;
+
+    [SerializeField]
+    AudioSource hitSource;
+
+    [SerializeField]
     int playerNumber;
     public int PlayerNumber
     {
@@ -66,6 +72,8 @@ public class PlayerHealth : MonoBehaviour, IDamagable
         health -= damage;
 
         ParticleSystem explosion = Instantiate(hitExplosion, this.gameObject.transform);
+        hitSource.clip = hitClip;
+        hitSource.Play();
         
     }
 

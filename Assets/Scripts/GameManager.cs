@@ -50,6 +50,12 @@ public class GameManager : MonoBehaviour {
 
     public int numCheck;
 
+    [SerializeField]
+    AudioClip playerJoinedAudio;
+
+    [SerializeField]
+    AudioSource Noises;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -94,6 +100,8 @@ public class GameManager : MonoBehaviour {
                     Debug.Log("Controller" + (numCheck + 1));
                     playerReady[numCheck] = true;
                     joinScreens[numCheck].text = "Player " + (numCheck + 1) + " has joined the game";
+                    Noises.clip = playerJoinedAudio;
+                    Noises.Play();
                 }
             }
             else if(playerReady[numCheck] == true)
