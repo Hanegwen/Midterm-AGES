@@ -303,9 +303,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 0
   shootingArrow: {fileID: 114986639712821596}
-  chargeRate: 17
+  chargeRate: 30
   minCharge: 1000
-  maxCharge: 10000
+  maxCharge: 12000
   currentCharge: 0
   ActiveWeapon: 0
   canShoot: 0

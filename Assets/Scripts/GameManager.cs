@@ -16,6 +16,12 @@ public class GameManager : MonoBehaviour {
     Text countdownText;
 
     [SerializeField]
+    Text winnerText;
+
+    [SerializeField]
+    int winner;
+
+    [SerializeField]
     string[] playerNames;
 
     [SerializeField]
@@ -162,12 +168,14 @@ public class GameManager : MonoBehaviour {
 
         if(playerList.Count == 1)
         {
+            winner = playerList[0].GetComponent<IPlayerNumber>().PlayerNumberSet;
             GameOver(); //Fix when ready to test
         }
     }
 
     void GameOver()
     {
+        winnerText.text = "Player " + winner + " won!";
         EndGameCanvas.enabled = true;
         Time.timeScale = 0;
     }
