@@ -24,6 +24,8 @@ public class PlayerShooting : MonoBehaviour
             playerNumber = value;
         }
     }
+
+
     [SerializeField]
     Slider shootingArrow;
 
@@ -92,15 +94,8 @@ public class PlayerShooting : MonoBehaviour
 
         SwitchWeapon();
 
-        if (canShoot)
-        {
-            ShootWeapon();
-        }
 
-        else
-        {
-            StartCoroutine(CanShoot());
-        }
+        ShootWeapon();
     }
 
     void SwitchWeapon()
@@ -152,10 +147,6 @@ public class PlayerShooting : MonoBehaviour
     void ShootWeapon()
     {
         Debug.Log("Shooting" + (Input.GetAxis("WeaponShootController" + playerNumber)));
-        //if (currentCharge > maxCharge * 1.2)
-        //{
-        //    Explode();
-        //}
         if (Input.GetAxis("WeaponShootController" + playerNumber) < -.7 && !holdShoot)
         {
             currentCharge = 0;
@@ -204,22 +195,9 @@ public class PlayerShooting : MonoBehaviour
         }
 
         currentCharge = 0;
-        canShoot = false;
-
-        //StartCoroutine(CanShoot());
+ 
     }
 
-    void Explode()
-    {
-        canShoot = false;
-        //StartCoroutine(CanShoot());
-        //Weapon Explodes and hurts player
-    }
 
-    IEnumerator CanShoot()
-    {
-        yield return new WaitForSeconds(shootSpeed);
-        canShoot = true;
-    }
 
 }

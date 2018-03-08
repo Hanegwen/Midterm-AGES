@@ -56,6 +56,11 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     AudioSource Noises;
 
+    int numReady = 0;
+
+    [SerializeField]
+    Text controllerCheck;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -65,30 +70,29 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 1;
 
         playerNames = Input.GetJoystickNames();
+        controllerCheck.text = "Controllers Connected: " + playerNames.Length;
+        EndGameCanvas.GetComponentInChildren<SelectOnInput>().enabled = false;
     }
-	
 	// Update is called once per frame
 	void Update ()
     {
-
-        StartGameCheck();
+        
+        if (numReady > 1)
+        {
+            StartGameCheck();
+        }
         if (!gameStarted)
         {
             SetUpPlayers();
             StartGame();
         }
-        UIUpdate();
-        CheckDead();
+        if (gameStarted)
+        {
+            CheckDead();
+        }
     }
-
-    void UIUpdate()
-    {
-
-    }
-
     void SetUpPlayers()
     {
-        
         countdownText.text = gameLoadTime + "...";
         numCheck = 0;
         foreach (string number in playerNames)
@@ -100,6 +104,7 @@ public class GameManager : MonoBehaviour {
                     Debug.Log("Controller" + (numCheck + 1));
                     playerReady[numCheck] = true;
                     joinScreens[numCheck].text = "Player " + (numCheck + 1) + " has joined the game";
+                    numReady++;
                     Noises.clip = playerJoinedAudio;
                     Noises.Play();
                 }
@@ -110,7 +115,6 @@ public class GameManager : MonoBehaviour {
             }
         }
             Debug.Log(numCheck);
-
     }
 
     void StartGameCheck()
@@ -139,7 +143,6 @@ public class GameManager : MonoBehaviour {
             int i = 0;
             foreach(bool ready in playerReady)
             {
-                
                 if(playerReady[i])
                 {
                     GameObject player = Instantiate(playerPrefab, PlayerSpawnLocations[i]);
@@ -150,16 +153,11 @@ public class GameManager : MonoBehaviour {
                 i++;
             }
             //Start Game Here
-            
-
         }
-
     }
-
     void CheckDead()
     {
         Debug.Log("Player Alive: " + playerList.Count);
-        int i = 0;
         foreach(GameObject player in playerList)
         {
             Debug.Log("For Each Loop Called");
@@ -169,11 +167,19 @@ public class GameManager : MonoBehaviour {
                 Debug.Log("Player DEAD");
                 if (player.GetComponent<IPlayerNumber>().PlayerNumberSet >= 0)
                 {
-                    playerList.RemoveAt(i);
+                    //playerList.RemoveAt(i);
+                    player.GetComponent<PlayerHealth>().Kill = true;
                 }
             }
         }
 
+        for(int i = 0; i < playerList.Count; i++)
+        {
+            if(playerList[i].GetComponent<PlayerHealth>().Kill)
+            {
+                playerList.RemoveAt(i);
+            }
+        }
         if(playerList.Count == 1)
         {
             winner = playerList[0].GetComponent<IPlayerNumber>().PlayerNumberSet;
@@ -185,6 +191,7 @@ public class GameManager : MonoBehaviour {
     {
         winnerText.text = "Player " + winner + " won!";
         EndGameCanvas.enabled = true;
+        EndGameCanvas.GetComponentInChildren<SelectOnInput>().enabled = true;
         Time.timeScale = 0;
     }
 
@@ -193,7 +200,6 @@ public class GameManager : MonoBehaviour {
     {
         bool cancel = false;
         countdownText.enabled = true;
-
         for(int i = 0; i < gameLoadTime; i+=0)
         {
             yield return new WaitForSeconds(1);
@@ -203,8 +209,6 @@ public class GameManager : MonoBehaviour {
                 cancel = true;
                 
             }
-
-
         }
         if (cancel)
         {

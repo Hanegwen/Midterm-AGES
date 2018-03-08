@@ -53,6 +53,21 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     [SerializeField]
     ParticleSystem hitExplosion;
 
+    bool kill = false;
+
+    public bool Kill
+    {
+        get
+        {
+            return kill;
+        }
+
+        set
+        {
+            kill = value;
+        }
+    }
+
 
     // Use this for initialization
     void Start ()
@@ -64,6 +79,11 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     void Update ()
     {
         SetHealthUI();
+
+        if(kill)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void TakeDamage(float damage)

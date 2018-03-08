@@ -19,6 +19,7 @@ public class SelectOnInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Input.GetAxisRaw("VerticalController"));
         if (Input.GetAxisRaw("VerticalController") != 0 && buttonSelected == false)
         {
             eventSystem.SetSelectedGameObject(selectedObject);
