@@ -8,6 +8,9 @@ public class Destroyable : MonoBehaviour, IDamagable
     float health = 50;
 
     
+
+    AudioSource audioSource;
+    
     ParticleSystem ps;
 
     [SerializeField]
@@ -24,6 +27,7 @@ public class Destroyable : MonoBehaviour, IDamagable
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         ps = GetComponentInChildren<ParticleSystem>();
 
         if(ps != null)
@@ -50,7 +54,10 @@ public class Destroyable : MonoBehaviour, IDamagable
 
             if (explode)
             {
+                
+
                 Destroy(this.gameObject);
+
             }
         }
     }
@@ -99,7 +106,8 @@ public class Destroyable : MonoBehaviour, IDamagable
 
 
         explode = true;
-        yield return new WaitForSeconds(0);
+        audioSource.Play();
+        yield return new WaitForSeconds(.5f);
 
     }
 
