@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BazookaShell : ShotWeapon
 {
-    float lifeTime = 5;
+    float lifeTime = 7;
     MeshCollider meshCollider;
 
     // Use this for initialization

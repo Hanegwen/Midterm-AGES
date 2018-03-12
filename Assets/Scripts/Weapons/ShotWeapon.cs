@@ -56,6 +56,10 @@ public abstract class ShotWeapon : MonoBehaviour
         {
             hitMax = true;
             GetComponent<Rigidbody>().AddRelativeForce(-transform.up * currentCharge * Time.deltaTime);
+            if(this.gameObject.transform.position.y < minY)
+            {
+                hitMax = false;
+            }
         }
     }
 

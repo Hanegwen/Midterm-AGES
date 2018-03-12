@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Grenade : ShotWeapon
 {
-    float lifeTime = 6;
+    float lifeTime = 8;
 
     CapsuleCollider capsuleCollider;
 
