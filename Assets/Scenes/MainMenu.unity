@@ -705,6 +705,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138a17e4ed7e13f4ba341b4085ee75ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 50
+  dealtDamage: 0
+  exploding: 0
+  explode: 0
+  touchingPlayer: 0
 --- !u!64 &178010885
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1090,6 +1095,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138a17e4ed7e13f4ba341b4085ee75ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 50
+  dealtDamage: 0
+  exploding: 0
+  explode: 0
+  touchingPlayer: 0
 --- !u!64 &393800065
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1332,6 +1342,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138a17e4ed7e13f4ba341b4085ee75ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 50
+  dealtDamage: 0
+  exploding: 0
+  explode: 0
+  touchingPlayer: 0
 --- !u!64 &493630626
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1513,7 +1528,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 476.5, y: -458.4}
+  m_AnchoredPosition: {x: 476.5, y: -477.975}
   m_SizeDelta: {x: 470.3, y: 88.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &554180324
@@ -1992,6 +2007,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138a17e4ed7e13f4ba341b4085ee75ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 50
+  dealtDamage: 0
+  exploding: 0
+  explode: 0
+  touchingPlayer: 0
 --- !u!64 &834288748
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2147,6 +2167,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138a17e4ed7e13f4ba341b4085ee75ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 50
+  dealtDamage: 0
+  exploding: 0
+  explode: 0
+  touchingPlayer: 0
 --- !u!64 &908252839
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2348,6 +2373,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138a17e4ed7e13f4ba341b4085ee75ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 50
+  dealtDamage: 0
+  exploding: 0
+  explode: 0
+  touchingPlayer: 0
 --- !u!64 &1124884214
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2634,8 +2664,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 476.5, y: -190.4}
-  m_SizeDelta: {x: 701, y: 313.8}
+  m_AnchoredPosition: {x: 476.5, y: -209.975}
+  m_SizeDelta: {x: 910.8, y: 392.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1164528579
 MonoBehaviour:
@@ -2925,6 +2955,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138a17e4ed7e13f4ba341b4085ee75ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 50
+  dealtDamage: 0
+  exploding: 0
+  explode: 0
+  touchingPlayer: 0
 --- !u!64 &1292771742
 MeshCollider:
   m_ObjectHideFlags: 0
